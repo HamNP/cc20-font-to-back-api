@@ -13,3 +13,18 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String
+  name     String
+  password String
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  role     Role     @default(USER)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
