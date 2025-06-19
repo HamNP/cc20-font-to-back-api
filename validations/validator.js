@@ -21,7 +21,7 @@ export const validate = (schema) => async (req,res,next) => {
   } catch (error) {
     const errMsg = error.errors.map((item)=>item)
     const errTxt = errMsg.join(",")
-    console.log(errTxt)
+    console.log("errortext",errTxt)
     const mergeErr = new Error(errTxt)
     next(mergeErr);
   }

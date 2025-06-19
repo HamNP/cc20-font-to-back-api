@@ -25,25 +25,67 @@ export const listUser = async (req,res,next) => {
   }
 }
 
-export const updateRoleUser = (req,res,next) => {
+export const updateRoleUser = async (req,res,next) => {
   try {
     //1. Read params & body
     const {id} = req.params;
     const {role} = req.body;
     console.log(id,role);
-    res.json({message:"This is Update Role User"})
+    //2. Update to DB
+    const user = await prisma.user.update({
+      where: {
+        id:Number(id)
+      },
+      data:{
+        role:role
+      }
+    })
+
+
+
+
+    res.json({message:`Update Role ${user.name}`})
   } catch (error) {
     next(error)
   }
 }
 
-export const deleteUser = (req,res,next) => {
+
+export const deleteUser = async (req,res,next) => {
   try {
-    res.json({message:"This is Delete User"})
+    const {id} = req.params;
+    const user = await prisma.user.delete({
+      where:{
+        id:Number(id)
+      },
+    })
+    res.json({message:"Delete Success!!!"})
+  } catch (error) {
+    next(error)
+  }
+
+}
+export const getMe = async (req,res,next) => {
+  try {
+    const {id} = req.user;
+    console.log(id)
+    const user = await prisma.user.findFirst({
+      where:{
+        id:Number(id)
+      },
+      omit:{
+        password:true
+      }
+    })
+    res.json({result:user,message:"Yoohoo Backend Success!!"})
   } catch (error) {
     next(error)
   }
 }
+
+
+
+
 export const readUser = (req,res) => {
   res.json({message:"This is Read User"})
 }

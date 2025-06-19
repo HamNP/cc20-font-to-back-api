@@ -1,6 +1,6 @@
 import express from "express";
 //Controllers
-import { listUser,readUser,createUser,updateRoleUser,deleteUser } from "../controllers/user.js";
+import { listUser,readUser,createUser,updateRoleUser,deleteUser,getMe } from "../controllers/user.js";
 //Middlewares
 import { authCheck } from "../middlewares/auth.middleware.js";
 
@@ -36,8 +36,8 @@ router.get('/users',authCheck,listUser);
     
 
 
-
-
+  
+   router.get("/getme",authCheck,getMe)
 
 
 
