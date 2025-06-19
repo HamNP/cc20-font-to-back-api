@@ -3,7 +3,7 @@ import { createError } from "../utils/createError.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"; 
 
-export const register = async (req,res)=>{
+export const register = async (req,res,next)=>{
 try {
   //code body
   // TODO Overview Register
