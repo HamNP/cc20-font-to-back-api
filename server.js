@@ -29,7 +29,9 @@ app.use('/auth',authRouter)
 app.use(error)
 //404
 app.use(notFound)
-
+app.use((req, res) => {
+  res.json({ message: "Get the code" })
+})
 
 const PORT = 8000
 //Start Server
